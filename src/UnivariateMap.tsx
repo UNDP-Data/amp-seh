@@ -23,7 +23,7 @@ export const UnivariateMap = () => {
   const mapSvg = useRef<SVGSVGElement>(null);
   const mapG = useRef<SVGGElement>(null);
   const projection = geoMercator().rotate([0, 0]).scale(325).translate([115, 230]);
-  const radiusScale = scaleSqrt().domain([0, 5000000]).range([0, 50]);
+  const radiusScale = scaleSqrt().domain([0, 5000000]).range([0, 25]);
   return (
     <El>
       <svg width='100%' viewBox={`0 0 ${svgWidth} ${svgHeight}`} ref={mapSvg}>
