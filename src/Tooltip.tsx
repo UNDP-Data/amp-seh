@@ -1,8 +1,17 @@
-import { format } from 'd3-format';
 import styled from 'styled-components';
 
+interface HoverType {
+  country: string;
+  round: string | null;
+  partner: string | null;
+  budget: string | null;
+  coFinancing: string | null;
+  xPosition: number;
+  yPosition: number;
+}
+
 interface Props {
-  data: any;
+  data: HoverType;
 }
 
 interface TooltipElProps {
@@ -54,6 +63,18 @@ const TooltipHead = styled.div`
   justify-content: space-between;
 `;
 
+const TitleEl = styled.div`
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+`;
+
+const BodyEl = styled.div`
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+`;
+
 export const Tooltip = (props: Props) => {
   const {
     data,
@@ -66,25 +87,39 @@ export const Tooltip = (props: Props) => {
         </TooltipTitle>
       </TooltipHead>
       {
-        !data.AMP && !data.AO ? (
+        !data.round ? (
           <>
             <TooltipBody>
-              Not a part of AO nor AMP
+              Not a part of AMP
             </TooltipBody>
           </>
         ) : (
           <>
             <TooltipBody>
-              <div>
-                Part of:
-                {' '}
-                <span className='bold'>{data.AMP && data.AO ? 'AO & AMP both' : data.AMP ? 'AMP Only' : 'AO Only'}</span>
-              </div>
-              <div>
-                Potential Beneficiaries:
-                {' '}
-                <span className='bold'>{format('0.2s')(data.value)}</span>
-              </div>
+              <TitleEl>
+                Round
+              </TitleEl>
+              <BodyEl>
+                {data.round}
+              </BodyEl>
+              <TitleEl>
+                Partner
+              </TitleEl>
+              <BodyEl>
+                {data.partner}
+              </BodyEl>
+              <TitleEl>
+                Project Budget
+              </TitleEl>
+              <BodyEl>
+                {data.budget}
+              </BodyEl>
+              <TitleEl>
+                Estimated co-financing
+              </TitleEl>
+              <BodyEl>
+                {data.coFinancing}
+              </BodyEl>
             </TooltipBody>
           </>
         )

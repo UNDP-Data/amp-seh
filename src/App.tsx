@@ -1,6 +1,4 @@
 import styled, { createGlobalStyle } from 'styled-components';
-import { useState } from 'react';
-import { Radio } from 'antd';
 import 'antd/dist/antd.css';
 import { UnivariateMap } from './UnivariateMap';
 
@@ -124,44 +122,12 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const RadioEl = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-bottom: 2rem;
-  font-size: 2rem;
-`;
-
-const TitleEl = styled.div`
-  font-weight: 700;
-  font-size: 2.4rem;
-  line-height: 3rem;
-  margin: 2rem 0;
-  text-align: center;
-  color: var(--primary-blue);
-`;
-
-const KeyTitleEl = styled.div`
-  font-weight: 700;
-  font-size: 1.4rem;
-  line-height: 3rem;
-  font-style: italic;
-  margin: -1rem 0 3rem 0;
-  text-align: center;
-`;
-
-const SubTitle = styled.div`
-  margin: 4rem 0 2rem 0;
-  font-weight: 700;
-  font-size: 1.8rem;
-  line-height: 2.4rem;
-  text-align: center;
-`;
-
 const KeyContainer = styled.div`
   display: flex;
-  margin: 2rem 0;
+  gap: 2rem;
   justify-content: center;
   flex-wrap: wrap;
+  margin: 4rem 0;
 `;
 
 const KeyEl = styled.div`
@@ -170,82 +136,35 @@ const KeyEl = styled.div`
   align-items: center;
   font-size: 2rem;
   font-weight: bold;
+  gap: 0.5rem;
 `;
 
 const ColorBox = styled.div`
   width: 1.8rem;
   height: 1.8rem;
-  margin-right: 0.5rem;
 `;
 
-const COLOR = ['#3a6b35', '#829d60', '#cbd18f'];
+const CATCOLOR = ['#FCB814', '#00548A', '#8AC499'];
 
-const CATCOLOR = ['#0B5588', '#FBB719', '#88C59A'];
-
-const App = () => {
-  const [value, setValue] = useState<'AMP' | 'All' | 'Planned'>('All');
-  return (
-    <>
-      <GlobalStyle />
-      <TitleEl>Bringing Electricity to 500 Million People</TitleEl>
-      <RadioEl>
-        <Radio.Group
-          onChange={(val) => { setValue(val.target.value); }}
-          value={value}
-          buttonStyle='solid'
-          size='large'
-        >
-          <Radio.Button className='radioLabel' value='All'>All (AMP + AO)</Radio.Button>
-          <Radio.Button className='radioLabel' value='AMP'>Ongoing Efforts (AMP)</Radio.Button>
-          <Radio.Button className='radioLabel' value='Planned'>Planned Efforts (AO)</Radio.Button>
-        </Radio.Group>
-      </RadioEl>
-      <SubTitle>Targeted countries</SubTitle>
-      {
-        value === 'All'
-          ? (
-            <KeyContainer>
-              <KeyEl>
-                <ColorBox style={{ backgroundColor: CATCOLOR[0] }} />
-                <div style={{ color: CATCOLOR[0] }}>AO & AMP</div>
-              </KeyEl>
-              <KeyEl>
-                <ColorBox style={{ backgroundColor: CATCOLOR[1] }} />
-                <div style={{ color: CATCOLOR[1] }}>AMP Only</div>
-              </KeyEl>
-              <KeyEl>
-                <ColorBox style={{ backgroundColor: CATCOLOR[2] }} />
-                <div style={{ color: CATCOLOR[2] }}>AO Only</div>
-              </KeyEl>
-            </KeyContainer>
-          )
-          : (
-            <KeyContainer>
-              <KeyEl>
-                <ColorBox style={{ backgroundColor: COLOR[0] }} />
-                <div style={{ color: COLOR[0] }}>Round 1</div>
-              </KeyEl>
-              <KeyEl>
-                <ColorBox style={{ backgroundColor: COLOR[1] }} />
-                <div style={{ color: COLOR[1] }}>Round 2</div>
-              </KeyEl>
-              {
-                value === 'AMP'
-                  ? (
-                    <KeyEl>
-                      <ColorBox style={{ backgroundColor: COLOR[2] }} />
-                      <div style={{ color: COLOR[2] }}>Round 3</div>
-                    </KeyEl>
-                  ) : null
-              }
-            </KeyContainer>
-          )
-      }
-
-      <KeyTitleEl>Height of bars represent no. of potential beneficiaries</KeyTitleEl>
-      <UnivariateMap selectedValue={value} />
-    </>
-  );
-};
+const App = () => (
+  <>
+    <GlobalStyle />
+    <KeyContainer>
+      <KeyEl>
+        <ColorBox style={{ backgroundColor: CATCOLOR[0] }} />
+        <div style={{ color: CATCOLOR[0] }}>1st Round</div>
+      </KeyEl>
+      <KeyEl>
+        <ColorBox style={{ backgroundColor: CATCOLOR[1] }} />
+        <div style={{ color: CATCOLOR[1] }}>2nd Round</div>
+      </KeyEl>
+      <KeyEl>
+        <ColorBox style={{ backgroundColor: CATCOLOR[2] }} />
+        <div style={{ color: CATCOLOR[2] }}>3rd Round</div>
+      </KeyEl>
+    </KeyContainer>
+    <UnivariateMap />
+  </>
+);
 
 export default App;
