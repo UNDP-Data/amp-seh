@@ -1,19 +1,10 @@
 import { useRef, useState } from 'react';
-import styled from 'styled-components';
 import { geoMercator } from 'd3-geo';
 import World from './data/worldMap.json';
 import Data from './data/ea-data.json';
 import { Tooltip } from './Tooltip';
 
 const CATCOLOR = ['#FCB814', '#00548A', '#8AC499'];
-
-const El = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  margin: auto;
-  max-width: 62rem;
-`;
 
 export const UnivariateMap = () => {
   const [hoverData, setHoverData] = useState<any>(undefined);
@@ -23,7 +14,7 @@ export const UnivariateMap = () => {
   const mapG = useRef<SVGGElement>(null);
   const projection = geoMercator().rotate([0, 0]).scale(325).translate([115, 230]);
   return (
-    <El>
+    <div className='flex-div flex-hor-align-center' style={{ width: '100%', margin: 'auto', maxWidth: '32.5rem' }}>
       <svg width='100%' viewBox={`0 0 ${svgWidth} ${svgHeight}`} ref={mapSvg}>
         <g ref={mapG}>
           {
@@ -108,6 +99,6 @@ export const UnivariateMap = () => {
       {
         hoverData ? <Tooltip data={hoverData} /> : null
       }
-    </El>
+    </div>
   );
 };

@@ -24,55 +24,14 @@ interface TooltipElProps {
 const TooltipEl = styled.div<TooltipElProps>`
   display: block;
   position: fixed;
-  z-index: 10;
-  border-radius: 1rem;
-  font-size: 1.4rem;
-  background-color: var(--white);
-  box-shadow: 0 0 1rem rgb(0 0 0 / 15%);
+  z-index: 5;
+  background-color: var(--gray-200);
+  padding: 0.5rem 2rem;
   word-wrap: break-word;
   top: ${(props) => (props.verticalAlignment === 'bottom' ? props.y - 40 : props.y + 40)}px;
   left: ${(props) => (props.horizontalAlignment === 'left' ? props.x - 20 : props.x + 20)}px;
-  max-width: 24rem;
+  max-width: 15rem;
   transform: ${(props) => `translate(${props.horizontalAlignment === 'left' ? '-100%' : '0%'},${props.verticalAlignment === 'top' ? '-100%' : '0%'})`};
-`;
-
-const TooltipTitle = styled.div`
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: var(--navy);  
-  background: var(--black-400);
-  width: 100%;
-  box-sizing: border-box;
-  border-radius: 1rem 1rem 0 0;
-  padding: 1.6rem 4rem 1.6rem 2rem;
-  position: relative;
-  font-weight: 700;
-  font-size: 1.8rem;
-  line-height: 1.8rem;
-`;
-
-const TooltipBody = styled.div`
-  width: 100%;
-  box-sizing: border-box;
-  padding: 1rem 2rem;
-`;
-
-const TooltipHead = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const TitleEl = styled.div`
-  font-size: 1.4rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  margin-bottom: 0.5rem;
-`;
-
-const BodyEl = styled.div`
-  font-size: 1.6rem;
-  margin-bottom: 1.5rem;
 `;
 
 export const Tooltip = (props: Props) => {
@@ -81,46 +40,42 @@ export const Tooltip = (props: Props) => {
   } = props;
   return (
     <TooltipEl x={data.xPosition} y={data.yPosition} verticalAlignment={data.yPosition > window.innerHeight / 2 ? 'top' : 'bottom'} horizontalAlignment={data.xPosition > window.innerWidth / 2 ? 'left' : 'right'}>
-      <TooltipHead>
-        <TooltipTitle>
-          {data.country}
-        </TooltipTitle>
-      </TooltipHead>
+      <h2 className='bold'>
+        {data.country}
+      </h2>
       {
         !data.round ? (
           <>
-            <TooltipBody>
-              Not a part of AMP
-            </TooltipBody>
+            <p className='undp-typography bold'>
+              Not a part of AO nor AMP
+            </p>
           </>
         ) : (
           <>
-            <TooltipBody>
-              <TitleEl>
-                Round
-              </TitleEl>
-              <BodyEl>
-                {data.round}
-              </BodyEl>
-              <TitleEl>
-                Partner
-              </TitleEl>
-              <BodyEl>
-                {data.partner}
-              </BodyEl>
-              <TitleEl>
-                Project Budget
-              </TitleEl>
-              <BodyEl>
-                {data.budget}
-              </BodyEl>
-              <TitleEl>
-                Estimated co-financing
-              </TitleEl>
-              <BodyEl>
-                {data.coFinancing}
-              </BodyEl>
-            </TooltipBody>
+            <h6 className='undp-typography margin-bottom-01'>
+              Round
+            </h6>
+            <p className='undp-typography margin-bottom-07'>
+              {data.round}
+            </p>
+            <h6 className='undp-typography margin-bottom-01'>
+              Partner
+            </h6>
+            <p className='undp-typography margin-bottom-07'>
+              {data.partner}
+            </p>
+            <h6 className='undp-typography margin-bottom-01'>
+              Project Budget
+            </h6>
+            <p className='undp-typography margin-bottom-07'>
+              {data.budget}
+            </p>
+            <h6 className='undp-typography margin-bottom-01'>
+              Estimated co-financing
+            </h6>
+            <p className='undp-typography margin-bottom-07'>
+              {data.coFinancing}
+            </p>
           </>
         )
       }
