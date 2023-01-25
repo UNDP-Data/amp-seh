@@ -25,8 +25,9 @@ const TooltipEl = styled.div<TooltipElProps>`
   display: block;
   position: fixed;
   z-index: 5;
-  background-color: var(--gray-200);
-  padding: 0.5rem 2rem;
+  background-color: var(--gray-100);
+  border: 1px solid var(--gray-400);
+  padding: 0.5rem var(--spacing-05);
   word-wrap: break-word;
   top: ${(props) => (props.verticalAlignment === 'bottom' ? props.y - 40 : props.y + 40)}px;
   left: ${(props) => (props.horizontalAlignment === 'left' ? props.x - 20 : props.x + 20)}px;
@@ -40,7 +41,7 @@ export const Tooltip = (props: Props) => {
   } = props;
   return (
     <TooltipEl x={data.xPosition} y={data.yPosition} verticalAlignment={data.yPosition > window.innerHeight / 2 ? 'top' : 'bottom'} horizontalAlignment={data.xPosition > window.innerWidth / 2 ? 'left' : 'right'}>
-      <h2 className='bold'>
+      <h2 className='bold margin-top-00 margin-bottom-05'>
         {data.country}
       </h2>
       {
@@ -55,25 +56,25 @@ export const Tooltip = (props: Props) => {
             <h6 className='undp-typography margin-bottom-01'>
               Round
             </h6>
-            <p className='undp-typography margin-bottom-07'>
+            <p className='undp-typography margin-bottom-05'>
               {data.round}
             </p>
             <h6 className='undp-typography margin-bottom-01'>
               Partner
             </h6>
-            <p className='undp-typography margin-bottom-07'>
+            <p className='undp-typography margin-bottom-05'>
               {data.partner}
             </p>
             <h6 className='undp-typography margin-bottom-01'>
               Project Budget
             </h6>
-            <p className='undp-typography margin-bottom-07'>
+            <p className='undp-typography margin-bottom-05'>
               {data.budget}
             </p>
             <h6 className='undp-typography margin-bottom-01'>
               Estimated co-financing
             </h6>
-            <p className='undp-typography margin-bottom-07'>
+            <p className='undp-typography margin-bottom-05'>
               {data.coFinancing}
             </p>
           </>
